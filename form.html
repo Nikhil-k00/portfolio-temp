@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Days Lived Calculator</title>
+</head>
+<style>
+    body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+}
+
+/* ===== GLASS CARD ===== */
+.hell {
+    width: 360px;
+    padding: 40px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    animation: floatCard 4s ease-in-out infinite;
+}
+
+/* Floating card animation */
+@keyframes floatCard {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ===== TITLE ===== */
+.hell h1 {
+    margin-bottom: 25px;
+    font-size: 24px;
+    color: #333;
+}
+
+/* ===== INPUT ===== */
+input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border: none;
+    font-size: 15px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.7);
+    color: #333;
+    transition: 0.3s;
+}
+
+input[type="date"]:focus {
+    background: white;
+    box-shadow: 0 0 10px rgba(255, 140, 140, 0.6);
+}
+
+/* ===== BUTTON ===== */
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    color: #fff;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 126, 95, 0.6);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* ===== RESULT TEXT ===== */
+h2#res {
+    margin-top: 25px;
+    min-height: 50px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s ease;
+    color: #ff3f34;
+    font-size: 20px;
+}
+
+/* Show result animation */
+h2#res.showResult {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+<body>
+   <div class="hell">
+    <h1>Days Lived Calculator</h1>
+    <label for="date">Select your birth date:</label>
+    <input type="date" id="date">
+    <button onclick="cal()">Calculate</button>
+    <h2 id="res"></h2>
+</div>
+
+<script>
+function cal()
+{
+    var dob = document.getElementById("date").value;
+    let today = new Date();
+    dob = new Date(dob);
+    
+    let diff = Math.abs(today - dob);
+    const difdays = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+    const result = document.getElementById("res");
+
+    result.classList.remove("showResult");
+    void result.offsetWidth;   // restart animation
+
+    result.innerHTML = `You have lived approximately ${difdays} days.`;
+    result.classList.add("showResult");
+}
+</script>
+</body>
+</html>
